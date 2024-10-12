@@ -1,12 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { deleteGame } from "../Services";
 
-const Game = ({ data }) => {
+const Game = ({ data, handleDelete }) => {
     const navigate = useNavigate();
-
-    const handleDelete = () => {
-        deleteGame(data.id);
-    }
 
     return(
         <div>

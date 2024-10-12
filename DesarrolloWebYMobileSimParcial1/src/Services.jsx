@@ -2,33 +2,37 @@ const URL = "http://localhost:3000/api/games/";
 
 export const getGames = async () => {
     const res =  await fetch(URL);
-    return res;
+    return await res.json();
 }
 
 export const getGame = async (id) => {
     const res = await fetch(URL + id);
-    return res;
+    const gameArray = await res.json();
+    return gameArray[0];
 }
 
 export const postGame = async (gameData) => {
     const res = await fetch(URL, {
-        method: POST,
+        method: 'POST',
+        headers: {
+            "Content-Type":"application/json"
+        },
         body: JSON.stringify(gameData)
     });
-    return res;
+    return await res.json();
 }
 
 export const putGame = async (gameData) => {
     const res = await fetch(URL + gameData.id, {
-        method: PUT,
+        method: 'PUT',
         body: JSON.stringify(gameData)
     });
-    return res;
+    return await res.json();
 }
 
 export const deleteGame = async (id) => {
     const res = await fetch(URL + id, {
-        method: DELETE
+        method: 'DELETE'
     });
-    return res;
+    return await res.json();
 }
