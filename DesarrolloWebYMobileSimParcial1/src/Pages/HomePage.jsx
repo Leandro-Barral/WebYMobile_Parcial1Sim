@@ -2,6 +2,8 @@ import { getGames, deleteGame } from "../Services"
 import Game from "../Components/Game"
 import { useEffect, useState } from "react"
 import Modal from "../Components/Modal"
+import styles from './HomePage.module.css';
+
 
 const HomePage = () => {
     const [games, setGames] = useState([]);
@@ -17,16 +19,18 @@ const HomePage = () => {
     }, [])
 
     return (
-        <>
+        <div className={styles.homepageContainer}>
             <h1>Gestor de los Juegos Olímpicos</h1>
-            <button onClick={newGame}>Agregar Juego</button>
-            {games.map((game) => {
-                return (
-                    <Game data={game} handleDelete={async () => {setGames(await deleteGame(game.id));}}/>
-                )
-            })}
+            <button onClick={newGame} className={styles.btnAgregarJuego}>Agregar Juego</button>
+            <div className={styles.gamesContainer}>
+                {games.map((game) => {
+                    return (
+                        <Game data={game} handleDelete={async () => {setGames(await deleteGame(game.id));}}/>
+                    )
+                })}
+            </div>
             <Modal isOpen={isCreating} setgames={setGames} close={()=>{setIsCreating(false)}} title={"Nuevo Juego"}></Modal>            
-        </>
+        </div>
     )
 }
 
